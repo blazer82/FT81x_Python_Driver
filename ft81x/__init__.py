@@ -28,6 +28,9 @@ _lib.ft81x_init.restype = ctypes.c_int
 _lib.ft81x_destroy.argtypes = [ctypes.c_void_p]
 _lib.ft81x_destroy.restype = None
 
+_lib.ft81x_get_error.argtypes = [ctypes.c_void_p]
+_lib.ft81x_get_error.restype = ctypes.c_char_p
+
 _lib.ft81x_read8.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
 _lib.ft81x_read8.restype = ctypes.c_uint8
 _lib.ft81x_read16.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
@@ -194,7 +197,9 @@ class FT81x:
             cs1_pin, cs2_pin, dc_pin,
         )
         if rc != 0:
-            raise RuntimeError("Failed to initialize FT81x")
+            err = _lib.ft81x_get_error(self._dev)
+            msg = err.decode() if err else "Failed to initialize FT81x"
+            raise RuntimeError(msg)
 
     def close(self):
         _lib.ft81x_destroy(self._dev)
@@ -331,8 +336,8 @@ class FT81x:
 
     # ---- Audio ----
 
-    def play_audio(self, offset, data, sample_rate, format_=AUDIO_FORMAT_LINEAR, loop=False):
-        _lib.ft81x_play_audio(self._dev, offset, len(data), sample_rate, format_, loop)
+    def play_audio(self, offset, size, sample_rate, format_=AUDIO_FORMAT_LINEAR, loop=False):
+        _lib.ft81x_play_audio(self._dev, offset, size, sample_rate, format_, loop)
 
     def set_audio_volume(self, volume):
         _lib.ft81x_set_audio_volume(self._dev, volume)

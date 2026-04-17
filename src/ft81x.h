@@ -13,10 +13,14 @@ typedef struct {
     uint16_t cmd_write_address;
     uint16_t width;
     uint16_t height;
+    char error[128];
 } ft81x_t;
 
 /* Returns sizeof(ft81x_t) so Python can allocate the right buffer size. */
 size_t ft81x_sizeof(void);
+
+/* Returns the last error message, or NULL if no error. */
+const char *ft81x_get_error(ft81x_t *dev);
 
 /* Lifecycle */
 int  ft81x_init(ft81x_t *dev, const char *spi_device, const char *gpio_chip,
