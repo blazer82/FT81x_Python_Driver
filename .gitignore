@@ -1,0 +1,25 @@
+# Build
+build/
+_skbuild/
+dist/
+*.egg-info/
+*.whl
+
+# C
+*.o
+*.so
+*.dylib
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+.claude

@@ -1,0 +1,370 @@
+#ifndef FT81X_REGISTERS_H
+#define FT81X_REGISTERS_H
+
+/* ---- Host Commands ---- */
+#define FT81X_CMD_ACTIVE    0x000000
+#define FT81X_CMD_STANDBY   0x410000
+#define FT81X_CMD_SLEEP     0x420000
+#define FT81X_CMD_PWRDOWN   0x430000
+#define FT81X_CMD_CLKEXT    0x440000
+#define FT81X_CMD_CLKINT    0x480000
+#define FT81X_CMD_CLKSEL    0x610000
+#define FT81X_CMD_RST_PULSE 0x680000
+#define FT81X_CMD_PINDRIVE  0x700000
+
+/* ---- Register Addresses ---- */
+#define FT81X_REG_ID              0x302000
+#define FT81X_REG_FRAMES          0x302004
+#define FT81X_REG_CLOCK           0x302008
+#define FT81X_REG_FREQUENCY       0x30200C
+#define FT81X_REG_RENDERMODE      0x302010
+#define FT81X_REG_SNAPY           0x302014
+#define FT81X_REG_SNAPSHOT        0x302018
+#define FT81X_REG_SNAPFORMAT      0x30201C
+#define FT81X_REG_CPURESET        0x302020
+#define FT81X_REG_TAP_CRC         0x302024
+#define FT81X_REG_TAP_MASK        0x302028
+#define FT81X_REG_HCYCLE          0x30202C
+#define FT81X_REG_HOFFSET         0x302030
+#define FT81X_REG_HSIZE           0x302034
+#define FT81X_REG_HSYNC0          0x302038
+#define FT81X_REG_HSYNC1          0x30203C
+#define FT81X_REG_VCYCLE          0x302040
+#define FT81X_REG_VOFFSET         0x302044
+#define FT81X_REG_VSIZE           0x302048
+#define FT81X_REG_VSYNC0          0x30204C
+#define FT81X_REG_VSYNC1          0x302050
+#define FT81X_REG_DLSWAP          0x302054
+#define FT81X_REG_ROTATE          0x302058
+#define FT81X_REG_OUTBITS         0x30205C
+#define FT81X_REG_DITHER          0x302060
+#define FT81X_REG_SWIZZLE         0x302064
+#define FT81X_REG_CSPREAD         0x302068
+#define FT81X_REG_PCLK_POL        0x30206C
+#define FT81X_REG_PCLK            0x302070
+#define FT81X_REG_TAG_X           0x302074
+#define FT81X_REG_TAG_Y           0x302078
+#define FT81X_REG_TAG             0x30207C
+#define FT81X_REG_VOL_PB          0x302080
+#define FT81X_REG_VOL_SOUND       0x302084
+#define FT81X_REG_SOUND           0x302088
+#define FT81X_REG_PLAY            0x30208C
+#define FT81X_REG_GPIO_DIR        0x302090
+#define FT81X_REG_GPIO            0x302094
+#define FT81X_REG_GPIOX_DIR       0x302098
+#define FT81X_REG_GPIOX           0x30209C
+#define FT81X_REG_INT_FLAGS       0x3020A8
+#define FT81X_REG_INT_EN          0x3020AC
+#define FT81X_REG_INT_MASK        0x3020B0
+#define FT81X_REG_PLAYBACK_START  0x3020B4
+#define FT81X_REG_PLAYBACK_LENGTH 0x3020B8
+#define FT81X_REG_PLAYBACK_READPTR 0x3020BC
+#define FT81X_REG_PLAYBACK_FREQ   0x3020C0
+#define FT81X_REG_PLAYBACK_FORMAT 0x3020C4
+#define FT81X_REG_PLAYBACK_LOOP   0x3020C8
+#define FT81X_REG_PLAYBACK_PLAY   0x3020CC
+#define FT81X_REG_PWM_HZ          0x3020D0
+#define FT81X_REG_PWM_DUTY        0x3020D4
+#define FT81X_REG_MACRO_0         0x3020D8
+#define FT81X_REG_MACRO_1         0x3020DC
+#define FT81X_REG_CMD_READ        0x3020F8
+#define FT81X_REG_CMD_WRITE       0x3020FC
+#define FT81X_REG_CMD_DL          0x302100
+#define FT81X_REG_TRIM            0x302180
+#define FT81X_REG_ANA_COMP        0x302184
+#define FT81X_REG_SPI_WIDTH       0x302188
+#define FT81X_REG_DATESTAMP       0x302564
+#define FT81X_REG_CMDB_SPACE      0x302574
+#define FT81X_REG_CMDB_WRITE      0x302578
+#define FT81X_REG_TRACKER         0x309000
+#define FT81X_REG_TRACKER_1       0x309004
+#define FT81X_REG_TRACKER_2       0x309008
+#define FT81X_REG_TRACKER_3       0x30900C
+#define FT81X_REG_TRACKER_4       0x309010
+#define FT81X_REG_MEDIAFIFO_READ  0x309014
+#define FT81X_REG_MEDIAFIFO_WRITE 0x309018
+
+/* ---- Memory Map ---- */
+#define FT81X_RAM_G          0x000000
+#define FT81X_ROM_FONT       0x1E0000
+#define FT81X_ROM_FONT_ADDR  0x2FFFFC
+#define FT81X_RAM_DL         0x300000
+#define FT81X_RAM_REG        0x302000
+#define FT81X_RAM_CMD        0x308000
+
+/* ---- Display List Swap ---- */
+#define FT81X_DLSWAP_LINE    0x01
+#define FT81X_DLSWAP_FRAME   0x02
+
+/* ---- Display List Command Opcodes ---- */
+#define FT81X_DL_DISPLAY          0x00000000
+#define FT81X_DL_BITMAP_SOURCE    (0x01L << 24)
+#define FT81X_DL_CLEAR_COLOR_RGB  (0x02L << 24)
+#define FT81X_DL_TAG              (0x03L << 24)
+#define FT81X_DL_COLOR_RGB        (0x04L << 24)
+#define FT81X_DL_BITMAP_HANDLE    (0x05L << 24)
+#define FT81X_DL_CELL             (0x06L << 24)
+#define FT81X_DL_BITMAP_LAYOUT    (0x07L << 24)
+#define FT81X_DL_BITMAP_SIZE      (0x08L << 24)
+#define FT81X_DL_ALPHA_FUNC       (0x09L << 24)
+#define FT81X_DL_STENCIL_FUNC     (0x0AL << 24)
+#define FT81X_DL_BLEND_FUNC       (0x0BL << 24)
+#define FT81X_DL_STENCIL_OP       (0x0CL << 24)
+#define FT81X_DL_POINT_SIZE       (0x0DL << 24)
+#define FT81X_DL_LINE_WIDTH       (0x0EL << 24)
+#define FT81X_DL_CLEAR_COLOR_A    (0x0FL << 24)
+#define FT81X_DL_COLOR_A          (0x10L << 24)
+#define FT81X_DL_CLEAR_STENCIL    (0x11L << 24)
+#define FT81X_DL_CLEAR_TAG        (0x12L << 24)
+#define FT81X_DL_STENCIL_MASK     (0x13L << 24)
+#define FT81X_DL_TAG_MASK         (0x14L << 24)
+#define FT81X_DL_BITMAP_TRANSFORM_A (0x15L << 24)
+#define FT81X_DL_BITMAP_TRANSFORM_B (0x16L << 24)
+#define FT81X_DL_BITMAP_TRANSFORM_C (0x17L << 24)
+#define FT81X_DL_BITMAP_TRANSFORM_D (0x18L << 24)
+#define FT81X_DL_BITMAP_TRANSFORM_E (0x19L << 24)
+#define FT81X_DL_BITMAP_TRANSFORM_F (0x1AL << 24)
+#define FT81X_DL_SCISSOR_XY       (0x1BL << 24)
+#define FT81X_DL_SCISSOR_SIZE     (0x1CL << 24)
+#define FT81X_DL_CALL             (0x1DL << 24)
+#define FT81X_DL_JUMP             (0x1EL << 24)
+#define FT81X_DL_BEGIN            (0x1FL << 24)
+#define FT81X_DL_COLOR_MASK       (0x20L << 24)
+#define FT81X_DL_END              (0x21L << 24)
+#define FT81X_DL_SAVE_CONTEXT     (0x22L << 24)
+#define FT81X_DL_RESTORE_CONTEXT  (0x23L << 24)
+#define FT81X_DL_RETURN           (0x24L << 24)
+#define FT81X_DL_MACRO            (0x25L << 24)
+#define FT81X_DL_CLEAR            (0x26L << 24)
+#define FT81X_DL_VERTEX_FORMAT    (0x27L << 24)
+#define FT81X_DL_BITMAP_LAYOUT_H  (0x28L << 24)
+#define FT81X_DL_BITMAP_SIZE_H    (0x29L << 24)
+#define FT81X_DL_PALETTE_SOURCE   (0x2AL << 24)
+#define FT81X_DL_VERTEX_TRANSLATE_X (0x2BL << 24)
+#define FT81X_DL_VERTEX_TRANSLATE_Y (0x2CL << 24)
+#define FT81X_DL_NOP              (0x2DL << 24)
+#define FT81X_DL_VERTEX2F         (0x01L << 30)
+#define FT81X_DL_VERTEX2II        (0x01L << 31)
+
+/* ---- Coprocessor Commands ---- */
+#define FT81X_CMD_DLSTART     0xFFFFFF00
+#define FT81X_CMD_SWAP        0xFFFFFF01
+#define FT81X_CMD_COLDSTART   0xFFFFFF32
+#define FT81X_CMD_INTERRUPT   0xFFFFFF02
+#define FT81X_CMD_APPEND      0xFFFFFF1E
+#define FT81X_CMD_REGREAD     0xFFFFFF19
+#define FT81X_CMD_MEMWRITE    0xFFFFFF1A
+#define FT81X_CMD_INFLATE     0xFFFFFF22
+#define FT81X_CMD_LOADIMAGE   0xFFFFFF24
+#define FT81X_CMD_MEDIAFIFO   0xFFFFFF39
+#define FT81X_CMD_PLAYVIDEO   0xFFFFFF3A
+#define FT81X_CMD_VIDEOSTART  0xFFFFFF40
+#define FT81X_CMD_VIDEOFRAME  0xFFFFFF41
+#define FT81X_CMD_MEMSET      0xFFFFFF1B
+#define FT81X_CMD_MEMZERO     0xFFFFFF1C
+#define FT81X_CMD_MEMCPY      0xFFFFFF1D
+#define FT81X_CMD_BGCOLOR     0xFFFFFF09
+#define FT81X_CMD_FGCOLOR     0xFFFFFF0A
+#define FT81X_CMD_GRADIENT    0xFFFFFF0B
+#define FT81X_CMD_TEXT        0xFFFFFF0C
+#define FT81X_CMD_BUTTON      0xFFFFFF0D
+#define FT81X_CMD_KEYS        0xFFFFFF0E
+#define FT81X_CMD_PROGRESSBAR 0xFFFFFF0F
+#define FT81X_CMD_SLIDER      0xFFFFFF10
+#define FT81X_CMD_SCROLLBAR   0xFFFFFF11
+#define FT81X_CMD_TOGGLE      0xFFFFFF12
+#define FT81X_CMD_GAUGE       0xFFFFFF13
+#define FT81X_CMD_CLOCK       0xFFFFFF14
+#define FT81X_CMD_CALIBRATE   0xFFFFFF15
+#define FT81X_CMD_SPINNER     0xFFFFFF16
+#define FT81X_CMD_STOP        0xFFFFFF17
+#define FT81X_CMD_SETBASE     0xFFFFFF38
+#define FT81X_CMD_NUMBER      0xFFFFFF2E
+#define FT81X_CMD_LOADIDENTITY 0xFFFFFF26
+#define FT81X_CMD_TRANSLATE   0xFFFFFF27
+#define FT81X_CMD_SCALE       0xFFFFFF28
+#define FT81X_CMD_ROTATE_CMD  0xFFFFFF29
+#define FT81X_CMD_SETMATRIX   0xFFFFFF2A
+#define FT81X_CMD_SETFONT     0xFFFFFF2B
+#define FT81X_CMD_SETFONT2    0xFFFFFF3B
+#define FT81X_CMD_ROMFONT     0xFFFFFF3F
+#define FT81X_CMD_TRACK       0xFFFFFF2C
+#define FT81X_CMD_SKETCH      0xFFFFFF30
+#define FT81X_CMD_SNAPSHOT    0xFFFFFF1F
+#define FT81X_CMD_SNAPSHOT2   0xFFFFFF37
+#define FT81X_CMD_LOGO        0xFFFFFF31
+#define FT81X_CMD_SCREENSAVER 0xFFFFFF2F
+#define FT81X_CMD_GETPROPS    0xFFFFFF25
+#define FT81X_CMD_GETPTR      0xFFFFFF23
+#define FT81X_CMD_SETBITMAP   0xFFFFFF43
+
+/* ---- Primitive Types ---- */
+#define FT81X_PRIM_BITMAPS        1
+#define FT81X_PRIM_POINTS         2
+#define FT81X_PRIM_LINES          3
+#define FT81X_PRIM_LINE_STRIP     4
+#define FT81X_PRIM_EDGE_STRIP_R   5
+#define FT81X_PRIM_EDGE_STRIP_L   6
+#define FT81X_PRIM_EDGE_STRIP_A   7
+#define FT81X_PRIM_EDGE_STRIP_B   8
+#define FT81X_PRIM_RECTS          9
+
+/* ---- Drawing Options ---- */
+#define FT81X_OPT_3D          0x0000
+#define FT81X_OPT_FLAT        0x0100
+#define FT81X_OPT_SIGNED      0x0100
+#define FT81X_OPT_CENTERX     0x0200
+#define FT81X_OPT_CENTERY     0x0400
+#define FT81X_OPT_CENTER      0x0600
+#define FT81X_OPT_RIGHTX      0x0800
+#define FT81X_OPT_NOBACK      0x1000
+#define FT81X_OPT_NOTICKS     0x2000
+#define FT81X_OPT_NOHM        0x4000
+#define FT81X_OPT_NOPOINTER   0x4000
+#define FT81X_OPT_NOSECS      0x8000
+#define FT81X_OPT_NOHANDS     0xC000
+
+/* ---- Bitmap Formats ---- */
+#define FT81X_BITMAP_LAYOUT_ARGB1555  0x00
+#define FT81X_BITMAP_LAYOUT_L1        0x01
+#define FT81X_BITMAP_LAYOUT_L4        0x02
+#define FT81X_BITMAP_LAYOUT_L8        0x03
+#define FT81X_BITMAP_LAYOUT_RGB332    0x04
+#define FT81X_BITMAP_LAYOUT_ARGB2     0x05
+#define FT81X_BITMAP_LAYOUT_ARGB4     0x06
+#define FT81X_BITMAP_LAYOUT_RGB565    0x07
+#define FT81X_BITMAP_LAYOUT_PALETTED  0x08
+#define FT81X_BITMAP_LAYOUT_L2        0x11
+
+/* ---- Bitmap Filters ---- */
+#define FT81X_BITMAP_SIZE_NEAREST     0x00
+#define FT81X_BITMAP_SIZE_BILINEAR    0x01
+
+/* ---- Blend Functions ---- */
+#define FT81X_BLEND_ZERO              0
+#define FT81X_BLEND_ONE               1
+#define FT81X_BLEND_SRC_ALPHA         2
+#define FT81X_BLEND_DST_ALPHA         3
+#define FT81X_BLEND_ONE_MINUS_SRC_ALPHA 4
+#define FT81X_BLEND_ONE_MINUS_DST_ALPHA 5
+
+/* ---- Rotation Constants ---- */
+#define FT81X_ROTATE_LANDSCAPE                    0
+#define FT81X_ROTATE_LANDSCAPE_INVERTED           1
+#define FT81X_ROTATE_PORTRAIT                     2
+#define FT81X_ROTATE_PORTRAIT_INVERTED            3
+#define FT81X_ROTATE_LANDSCAPE_MIRRORED           4
+#define FT81X_ROTATE_LANDSCAPE_INVERTED_MIRRORED  5
+#define FT81X_ROTATE_PORTRAIT_MIRRORED            6
+#define FT81X_ROTATE_PORTRAIT_INVERTED_MIRRORED   7
+
+/* ---- Audio Formats ---- */
+#define FT81X_AUDIO_FORMAT_LINEAR   0x00
+#define FT81X_AUDIO_FORMAT_ULAW     0x01
+#define FT81X_AUDIO_FORMAT_ADPCM    0x02
+
+/* ---- Sound Effects ---- */
+#define FT81X_SOUND_SILENCE         0x00
+#define FT81X_SOUND_SQUARE_WAVE     0x01
+#define FT81X_SOUND_SINE_WAVE       0x02
+#define FT81X_SOUND_SAWTOOTH_WAVE   0x03
+#define FT81X_SOUND_TRIANGLE_WAVE   0x04
+#define FT81X_SOUND_BEEPING         0x05
+#define FT81X_SOUND_ALARM           0x06
+#define FT81X_SOUND_WARBLE          0x07
+#define FT81X_SOUND_CAROUSEL        0x08
+#define FT81X_SOUND_PIPS_1          0x10
+#define FT81X_SOUND_PIPS_2          0x11
+#define FT81X_SOUND_PIPS_3          0x12
+#define FT81X_SOUND_PIPS_4          0x13
+#define FT81X_SOUND_PIPS_5          0x14
+#define FT81X_SOUND_PIPS_6          0x15
+#define FT81X_SOUND_PIPS_7          0x16
+#define FT81X_SOUND_PIPS_8          0x17
+#define FT81X_SOUND_PIPS_9          0x18
+#define FT81X_SOUND_PIPS_10         0x19
+#define FT81X_SOUND_PIPS_11         0x1A
+#define FT81X_SOUND_PIPS_12         0x1B
+#define FT81X_SOUND_PIPS_13         0x1C
+#define FT81X_SOUND_PIPS_14         0x1D
+#define FT81X_SOUND_PIPS_15         0x1E
+#define FT81X_SOUND_PIPS_16         0x1F
+#define FT81X_SOUND_DTMF_HASH      0x23
+#define FT81X_SOUND_DTMF_STAR      0x2C
+#define FT81X_SOUND_DTMF_0         0x30
+#define FT81X_SOUND_DTMF_1         0x31
+#define FT81X_SOUND_DTMF_2         0x32
+#define FT81X_SOUND_DTMF_3         0x33
+#define FT81X_SOUND_DTMF_4         0x34
+#define FT81X_SOUND_DTMF_5         0x35
+#define FT81X_SOUND_DTMF_6         0x36
+#define FT81X_SOUND_DTMF_7         0x37
+#define FT81X_SOUND_DTMF_8         0x38
+#define FT81X_SOUND_DTMF_9         0x39
+#define FT81X_SOUND_HARP           0x40
+#define FT81X_SOUND_XYLOPHONE      0x41
+#define FT81X_SOUND_TUBA           0x42
+#define FT81X_SOUND_GLOCKENSPIEL   0x43
+#define FT81X_SOUND_ORGAN          0x44
+#define FT81X_SOUND_TRUMPET        0x45
+#define FT81X_SOUND_PIANO          0x46
+#define FT81X_SOUND_CHIMES         0x47
+#define FT81X_SOUND_MUSIC_BOX      0x48
+#define FT81X_SOUND_BELL           0x49
+#define FT81X_SOUND_CLICK          0x50
+#define FT81X_SOUND_SWITCH         0x51
+#define FT81X_SOUND_COWBELL        0x52
+#define FT81X_SOUND_NOTCH          0x53
+#define FT81X_SOUND_HIHAT          0x54
+#define FT81X_SOUND_KICKDRUM       0x55
+#define FT81X_SOUND_POP            0x56
+#define FT81X_SOUND_CLACK          0x57
+#define FT81X_SOUND_CHACK          0x58
+#define FT81X_SOUND_MUTE           0x60
+#define FT81X_SOUND_UNMUTE         0x61
+
+/* ---- ST7701S Display Controller Commands ---- */
+#define FT81X_ST7701S_CMD_NOP          0x00
+#define FT81X_ST7701S_CMD_SWRESET      0x01
+#define FT81X_ST7701S_CMD_RDDID        0x04
+#define FT81X_ST7701S_CMD_RDNUMED      0x05
+#define FT81X_ST7701S_CMD_RDDST        0x09
+#define FT81X_ST7701S_CMD_RDDPM        0x0A
+#define FT81X_ST7701S_CMD_RDDMADCTL    0x0B
+#define FT81X_ST7701S_CMD_RDDCOLMOD    0x0C
+#define FT81X_ST7701S_CMD_RDDIM        0x0D
+#define FT81X_ST7701S_CMD_RDDSM        0x0E
+#define FT81X_ST7701S_CMD_RDDSDR       0x0F
+#define FT81X_ST7701S_CMD_SLPIN        0x10
+#define FT81X_ST7701S_CMD_SLPOUT       0x11
+#define FT81X_ST7701S_CMD_PTLON        0x12
+#define FT81X_ST7701S_CMD_NORON        0x13
+#define FT81X_ST7701S_CMD_INVOFF       0x20
+#define FT81X_ST7701S_CMD_INVON        0x21
+#define FT81X_ST7701S_CMD_DISPOFF      0x28
+#define FT81X_ST7701S_CMD_DISPON       0x29
+#define FT81X_ST7701S_CMD_TEON         0x35
+#define FT81X_ST7701S_CMD_MADCTL       0x36
+#define FT81X_ST7701S_CMD_COLMOD       0x3A
+#define FT81X_ST7701S_CMD_WRDISBV      0x51
+#define FT81X_ST7701S_CMD_WRCTRLD      0x53
+#define FT81X_ST7701S_CMD_WRCACE       0x55
+#define FT81X_ST7701S_CMD_WRCABCMB     0x5E
+
+/* ST7701S Bank Selection */
+#define FT81X_ST7701S_CND2BKxSEL       0xFF
+#define FT81X_ST7701S_BK0_PARAM1       0x77
+#define FT81X_ST7701S_BK0_PARAM2       0x01
+#define FT81X_ST7701S_BK0_PARAM3       0x00
+#define FT81X_ST7701S_BK0_PARAM4       0x00
+#define FT81X_ST7701S_BKx_CMD          0x10
+#define FT81X_ST7701S_BK1_CMD          0x11
+
+/* ---- Color Helper Macro ---- */
+#define FT81X_COLOR_RGB(r, g, b) (((uint32_t)(r) << 16) | ((uint32_t)(g) << 8) | (uint32_t)(b))
+
+/* ---- Display Timing Defaults (480x480 ST7701S) ---- */
+#define FT81X_DISPLAY_WIDTH   480
+#define FT81X_DISPLAY_HEIGHT  480
+
+#endif
