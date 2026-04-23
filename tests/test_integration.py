@@ -1,14 +1,17 @@
 """Integration tests — require hardware (FT81x + Raspberry Pi 5)."""
 
+import ctypes
 import pathlib
 import pytest
 
+import ft81x as _ft81x_mod
 from ft81x import FT81x
 from ft81x.constants import REG_ID
 
 pytestmark = pytest.mark.skipif(
-    not pathlib.Path("/dev/spidev0.0").exists(),
-    reason="No SPI device — hardware tests require Raspberry Pi 5 with FT81x connected",
+    not pathlib.Path("/dev/spidev0.0").exists()
+    or not isinstance(_ft81x_mod._lib, ctypes.CDLL),
+    reason="Hardware tests require Raspberry Pi 5 with FT81x connected and compiled C library (pip install .)",
 )
 
 
@@ -17,7 +20,7 @@ class TestHardwareInit:
         """Verify REG_ID reads 0x7C."""
         with FT81x() as dev:
             chip_id = dev.read8(REG_ID)
-            assert chip_id == 0x7C, f"Expected chip ID 0x7C, got 0x{chip_id:02X}"
+            assert chip_id == 0x7C
 
     def test_display_init(self):
         """Verify display initializes without error."""
