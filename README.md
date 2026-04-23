@@ -19,7 +19,24 @@ Python driver for FT81x-series GPUs (BT815/BT816) on Raspberry Pi 5. A compiled 
 | CS2 (ST7701S) | GPIO 7         | CS        |
 | DC            | GPIO 25        | DC        |
 
-SPI must be enabled via `raspi-config` or by adding `dtparam=spi=on` to `/boot/firmware/config.txt`.
+### Raspberry Pi configuration
+
+Add the following to `/boot/firmware/config.txt` and reboot:
+
+```ini
+dtparam=spi=on
+dtoverlay=spi0-0cs
+```
+
+`spi0-0cs` prevents the kernel SPI driver from claiming GPIO 7 and 8 as hardware chip-selects, freeing them for the driver to manage via libgpiod.
+
+Add your user to the required groups:
+
+```bash
+sudo usermod -aG spi,gpio $USER
+```
+
+Log out and back in for the group change to take effect.
 
 ## Installation
 
@@ -28,9 +45,11 @@ sudo apt update
 sudo apt install libgpiod-dev cmake build-essential python3-pip
 ```
 
-Then install the driver:
+Then install the driver in a virtual environment:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install .
 ```
 
@@ -39,6 +58,8 @@ For development (includes pytest):
 ```bash
 pip install -e ".[dev]"
 ```
+
+**Note:** Run scripts from outside the repository directory (or ensure the local `ft81x/` source folder does not shadow the installed package). The compiled C library is only present in the installed copy under `site-packages/`.
 
 ## Testing
 
