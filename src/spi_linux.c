@@ -10,7 +10,7 @@ int spi_open(spi_device_t *dev, const char *device, uint32_t speed_hz) {
     dev->fd = open(device, O_RDWR);
     if (dev->fd < 0) return -1;
 
-    uint8_t mode = SPI_MODE_0 | SPI_NO_CS;
+    uint8_t mode = SPI_MODE_0;
     if (ioctl(dev->fd, SPI_IOC_WR_MODE, &mode) < 0) goto fail;
 
     uint8_t bits = 8;

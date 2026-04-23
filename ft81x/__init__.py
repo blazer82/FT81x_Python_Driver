@@ -16,6 +16,11 @@ from ft81x.constants import (
 )
 
 _lib_path = Path(__file__).parent / "libft81x.so"
+if not _lib_path.exists():
+    import importlib.util
+    _spec = importlib.util.find_spec("ft81x")
+    if _spec and _spec.origin:
+        _lib_path = Path(_spec.origin).parent / "libft81x.so"
 _lib = ctypes.CDLL(str(_lib_path))
 
 _lib.ft81x_sizeof.argtypes = []
